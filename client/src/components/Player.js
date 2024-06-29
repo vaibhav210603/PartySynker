@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './Player.css';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:5000');
+const socket = io('https://party-synker.vercel.app/');
 
 const Player = () => {
   const [audioURL, setAudioURL] = useState(null);
