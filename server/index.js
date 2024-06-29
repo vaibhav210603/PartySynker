@@ -12,7 +12,7 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, { cors: { origin: '*' }, maxHttpBufferSize : 1e8 });
 
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: 'https://party-synker-client.vercel.app/' }));
 
 app.get('/', (req, res) => {
   res.json({ msg: "hello from the backend!!!" });
