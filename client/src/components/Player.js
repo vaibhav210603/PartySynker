@@ -4,7 +4,10 @@ import io from 'socket.io-client';
 
 const socket = io('http://localhost:5000');
 
+
+
 const Player = () => {
+  const [users,setUsers]=useState([]);
   const [audioURL, setAudioURL] = useState(null);
   const audioRef = useRef(null);
 
@@ -59,8 +62,16 @@ const Player = () => {
     };
   }, []);
 
+//updating connected users.....
+  socket.on('users',(users)=>{
+    setUsers(users);
+  })
+
   return (
     <div className="player-container">
+        <div className='text'>
+          <span class="fancy">{users.length} </span> USERS CONNECTED!
+        </div>
       {audioURL && <audio ref={audioRef} controls src={audioURL}></audio>}
       <button onClick={manageClick}>Request File</button>
       <button onClick={syncPlay}>PLAY IN SYNC</button>

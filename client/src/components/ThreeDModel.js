@@ -3,7 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
-function Model({ url, scale, initialRotation }) {
+function Model({ url, scale, initialRotation, position }) {
   const { scene, animations } = useGLTF(url);
   const mixer = useRef(null);
 
@@ -36,12 +36,20 @@ function Model({ url, scale, initialRotation }) {
     }
   }, [initialRotation, scene]);
 
+  // Set initial position
+  useEffect(() => {
+    if (position) {
+      scene.position.set(position[0], position[1], position[2]);
+    }
+  }, [position, scene]);
+
   return <primitive object={scene} />;
 }
 
 function ThreeDModel() {
-  const defaultScale = 1.8; // Adjust this value to increase or decrease the size
-  const defaultRotation = [0.4, 2.8, 0]; // Adjust these values for the initial rotation
+  const defaultScale = 2; // Adjust this value to increase or decrease the size
+  const defaultRotation = [0.4, 2.6, 0]; // Adjust these values for the initial rotation
+  const defaultPosition = [-0.6, -0.2, 0]; // Adjust these values to set the initial position
 
   return (
     <div className="canvas-container">
@@ -56,6 +64,7 @@ function ThreeDModel() {
             url="/models/tenhun_falling_spaceman_fanart/scene.gltf"
             scale={defaultScale}
             initialRotation={defaultRotation}
+            position={defaultPosition}
           />
         </Suspense>
         <OrbitControls />

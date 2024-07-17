@@ -4,6 +4,7 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const fs = require('fs');
 const path = require('path');
+const { connected } = require("process");
 
 
 
@@ -12,7 +13,7 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, { cors: { origin: '*' }, maxHttpBufferSize : 1e8 });
 
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: 'http://localhost:3000' }));
 
 app.get('/', (req, res) => {
   res.json({ msg: "hello from the backend!!!" });
@@ -24,22 +25,17 @@ app.get('/admin', (req, res) => {
 
 
 
-for(let i =0;i<4;i++)
-{
-  
-  setTimeout(()=>{
-  const now= new Date();
-   console.log(now.getTime())},i*1000)
-
-}
 
 
 
-
+let users=[];
 
 
 io.on('connection', (socket) => {
 
+    users.push(socket.id);
+
+    io.emit('users',users)
   // Handle incoming audio stream
   socket.on('ReqAudio', () => {
     const song=fs.readFileSync("./smack.mp3");
@@ -47,7 +43,7 @@ io.on('connection', (socket) => {
     socket.emit('song', song); 
     
 
-    console.log("audio sent");
+    console.log("audio sent to user",);
 
 
       
