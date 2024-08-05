@@ -49,7 +49,7 @@ function Model({ url, scale, initialRotation, position }) {
 function ThreeDModel() {
   const defaultScale = 2; // Adjust this value to increase or decrease the size
   const defaultRotation = [0.4, 2.6, 0]; // Adjust these values for the initial rotation
-  const defaultPosition = [-0.6, -0.2, 0]; // Adjust these values to set the initial position
+  const defaultPosition = [-0.4, -0.6, 0]; // Adjust these values to set the initial position
 
   return (
     <div className="canvas-container">

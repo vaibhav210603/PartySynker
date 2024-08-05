@@ -2,14 +2,17 @@
 import React from 'react';
 import ThreeDModel from './ThreeDModel';
 import Player from './Player';
+import Admin from './Admin';
 import './MainComponent.css';
+
 
 function MainComponent() {
   return (
     <div className="main-container">
- <Player />     
+      <Admin></Admin>
+      <Player/>     
       <ThreeDModel />
-     
+      
     </div>
   );
 }

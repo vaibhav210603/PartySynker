@@ -6,6 +6,14 @@
     justify-content: center;
     margin: 20px;
   }
+
+  .button{
+    border: 2px white solid;
+    padding: 10px;
+  }
+  .button:hover{
+    font-size:15px;
+  }
   
   body {
     background: #000405;
