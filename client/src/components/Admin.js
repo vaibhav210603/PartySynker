@@ -37,7 +37,7 @@ export default function Admin() {
               <option value="godsplan.mp3">God's Plan</option>
               <option value="bigdawgs.mp3">Big Dawgs</option>
               <option value="jobhimai.mp3">Jo Bhi Mai</option>
-              <option value="manja.mp3">Manjha</option>
+              <option value="manjha.mp3">Manjha</option>
               <option value="milliondollarbaby.mp3">Million Dollar Baby</option>
               <option value="rollinginthedeep.mp3">Rolling in the deep</option>
               <option value="houseofmemories.mp3">House Of Memories</option>
