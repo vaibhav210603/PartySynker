@@ -117,12 +117,17 @@ const Player = () => {
   // Track audio loading progress
   const handleProgress = () => {
     const audio = audioRef.current;
+  
     if (audio) {
+   
       const buffered = audio.buffered;
       if (buffered.length > 0) {
+        setCanSyncPlay(false)
         const percentLoaded = (buffered.end(0) / audio.duration) * 100;
         console.log(`Audio loaded: ${percentLoaded.toFixed(2)}%`);
-        if (percentLoaded >= 50) {
+        if (percentLoaded < 20)
+        setCanSyncPlay(false);
+        if (percentLoaded >= 20) {
           setCanSyncPlay(true);
         }
       }

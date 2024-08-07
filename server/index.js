@@ -88,7 +88,7 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, { cors: { origin: '*' } });
 
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors());
 
 let users = [];
 
