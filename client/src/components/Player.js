@@ -9,6 +9,7 @@ const Player = () => {
   const [audioURL, setAudioURL] = useState(null);
   const audioRef = useRef(null);
   const [serverTimeOffset, setServerTimeOffset] = useState(0);
+  const [canSyncPlay, setCanSyncPlay] = useState(false);
 
   const manageClick = () => {
     const selectedSong = 'your_song_file.mp3'; // Update with the actual song file name
@@ -113,14 +114,34 @@ const Player = () => {
     };
   }, []);
 
+  // Track audio loading progress
+  const handleProgress = () => {
+    const audio = audioRef.current;
+    if (audio) {
+      const buffered = audio.buffered;
+      if (buffered.length > 0) {
+        const percentLoaded = (buffered.end(0) / audio.duration) * 100;
+        console.log(`Audio loaded: ${percentLoaded.toFixed(2)}%`);
+        if (percentLoaded >= 50) {
+          setCanSyncPlay(true);
+        }
+      }
+    }
+  };
+
   return (
     <div className="player-container">
       <div className='text'>
-        <span className="fancy">{users.length/2} </span> USERS CONNECTED!
+        <span className="fancy">{users.length / 2} </span> USERS CONNECTED!
       </div>
-      {audioURL && <audio ref={audioRef} controls src={audioURL} preload="auto"></audio>}
-      <button className='button' onClick={manageClick}>REQUEST FILE</button>
-      <button className='button' onClick={syncPlay}>PLAY IN SYNC</button>
+      {audioURL && (
+        <audio ref={audioRef} controls src={audioURL} preload="auto" onProgress={handleProgress}></audio>
+      )}
+      {canSyncPlay && (
+        <button className='button' onClick={syncPlay} disabled={!canSyncPlay}>
+          PLAY IN SYNC
+        </button>
+      )}
     </div>
   );
 };

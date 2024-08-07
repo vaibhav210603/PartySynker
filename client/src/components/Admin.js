@@ -6,7 +6,7 @@ const socket = io('http://localhost:5000/');
 
 export default function Admin() {
   const [flag, setFlag] = useState(false);
-  const [selectedSong, setSelectedSong] = useState(''); // Default selected song
+  const [selectedSong, setSelectedSong] = useState('believer.mp3'); // Default selected song
 
   const handlePlay = () => {
     socket.emit('select_song', selectedSong);
@@ -34,7 +34,7 @@ export default function Admin() {
               onChange={(e) => setSelectedSong(e.target.value)}
             >
               <option value="believer.mp3">Believer</option>
-              <option value="godsplan.mp3">God's Plan</option>
+              <option value="hotlinebling.mp3">Hotline Bling</option>
               <option value="bigdawgs.mp3">Big Dawgs</option>
               <option value="jobhimai.mp3">Jo Bhi Mai</option>
               <option value="manjha.mp3">Manjha</option>
