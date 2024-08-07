@@ -11,8 +11,9 @@ const Player = () => {
   const [serverTimeOffset, setServerTimeOffset] = useState(0);
 
   const manageClick = () => {
-    socket.emit('ReqAudio');
-    console.log(socket.id);
+    const selectedSong = 'your_song_file.mp3'; // Update with the actual song file name
+    socket.emit('select_song', selectedSong);
+    console.log(`Requested file: ${selectedSong}`);
   };
 
   const syncPlay = () => {
@@ -57,14 +58,13 @@ const Player = () => {
   }, []);
 
   useEffect(() => {
-    socket.on('song', (song) => {
-      const audioBlob = new Blob([song], { type: 'audio/mpeg' });
-      const audioURL = URL.createObjectURL(audioBlob);
-      setAudioURL(audioURL);
+    socket.on('song_url', (url) => {
+      setAudioURL(url);
+      console.log(`Received song URL: ${url}`);
     });
 
     return () => {
-      socket.off('song'); // Cleanup the event listener
+      socket.off('song_url'); // Cleanup the event listener
     };
   }, []);
 
@@ -116,7 +116,7 @@ const Player = () => {
   return (
     <div className="player-container">
       <div className='text'>
-        <span className="fancy">{users.length} </span> USERS CONNECTED!
+        <span className="fancy">{users.length/2} </span> USERS CONNECTED!
       </div>
       {audioURL && <audio ref={audioRef} controls src={audioURL} preload="auto"></audio>}
       <button className='button' onClick={manageClick}>REQUEST FILE</button>
