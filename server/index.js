@@ -90,7 +90,11 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, { cors: { origin: "*" } });
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://your-client-domain.com', // Replace with your client’s domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+}));
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, "public")));
