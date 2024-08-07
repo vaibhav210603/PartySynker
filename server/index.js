@@ -91,7 +91,7 @@ const httpServer = createServer(app);
 const io = new Server(httpServer, { cors: { origin: "*" } });
 
 app.use(cors({
-  origin: 'https://your-client-domain.com', // Replace with your client’s domain
+  origin: 'https://party-synker.vercel.app/', // Replace with your client’s domain
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
