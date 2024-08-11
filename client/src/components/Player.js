@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './Player.css';
 import io from 'socket.io-client';
 
-const socket = io('https://partysynker.onrender.com');
+const socket = io('https://partysynker.vercel.app/');
 
 const Player = () => {
   const [users, setUsers] = useState([]);
